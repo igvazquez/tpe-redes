@@ -25,7 +25,7 @@ def hello_world():
 @app.route('/ping')
 @REQUEST_TIME.time()
 def ping():
-    time.sleep(0.5)  # Simulate some processing time
+    time.sleep(2)  # Simulate some processing time
     return 'pong'
 
 # Define the endpoint to expose the Prometheus metrics

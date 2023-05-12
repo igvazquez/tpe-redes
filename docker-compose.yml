@@ -59,7 +59,14 @@ services:
       - my-network
     depends_on:
       - db
+  
+  node_exporter:
+    image: prom/node-exporter
+    restart: always
+    networks:
+      - my-network
+    ports:
+      - 9100:9100
 
 networks:
   my-network:
-
