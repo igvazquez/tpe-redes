@@ -60,7 +60,7 @@ services:
       - 9100:9100
 
   grafana:
-      image: grafana/grafana
+      image: grafana/grafana:latest
       ports:
         - "3000:3000"
       networks:
@@ -73,11 +73,10 @@ services:
         - prometheus
       volumes:
         - ./grafana/defaults.ini:/etc/grafana/conf/defaults.ini:ro
-        - ./grafana/provisioning/alerts:/etc/grafana/provisioning/alerts
-        - ./grafana/provisioning/alerting:/etc/grafana/provisioning/alerting
-        - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+        - ./grafana/provisioning:/etc/grafana/provisioning/
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
+      restart: always
 
 networks:
   my-network:
