@@ -40,21 +40,6 @@ services:
     links:
       - postgres_exporter
 
-  grafana:
-      image: grafana/grafana
-        # context: ./grafana
-        # dockerfile: Dockerfile
-      depends_on:
-        - prometheus
-      ports:
-        - "3000:3000"
-      networks:
-        - my-network
-      volumes:
-        - ./grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini:ro
-        - grafana_data:/var/lib/grafana
-        - grafana_log:/var/log/grafana
-
   postgres_exporter:
     image: wrouesnel/postgres_exporter
     environment:
@@ -73,6 +58,25 @@ services:
       - my-network
     ports:
       - 9100:9100
+
+  grafana:
+      image: grafana/grafana
+        # context: ./grafana
+        # dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
+      networks:
+        - my-network  
+      depends_on:
+        - postgres_exporter
+        - db
+        - node_exporter
+        - python_api
+        - prometheus
+      volumes:
+        - ./grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini:ro
+        - grafana_data:/var/lib/grafana
+        - grafana_log:/var/log/grafana
 
 networks:
   my-network:
