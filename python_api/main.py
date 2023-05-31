@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 from prometheus_client import Histogram, generate_latest, CONTENT_TYPE_LATEST
+from prometheus_flask_exporter import PrometheusMetrics
 import psycopg2
 import time
+import random
 
 # Connect to the PostgreSQL database
 conn = psycopg2.connect(
@@ -12,6 +14,7 @@ conn = psycopg2.connect(
 )
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 # Create a histogram to track the response time of requests
 REQUEST_TIME = Histogram('request_processing_seconds', 'Time spent processing request')
 
@@ -56,7 +59,14 @@ def add_user():
     cur.close()
     return jsonify({'id': id, 'name': name, 'email': email})
 
+@app.route('/sleep')
+def sleep():
+    start_time = time.time()
+    time.sleep(random.randint(0, 5))
+    end_time = time.time()
+    response_time = end_time - start_time
+    return 'Response Time: {} seconds'.format(response_time)
+
 if __name__ == '__main__':
     # Start the server
     app.run(debug=True, host='0.0.0.0', port=8000)
-
