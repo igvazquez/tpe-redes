@@ -73,7 +73,7 @@ services:
         - prometheus
       volumes:
         - ./grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini:ro
-        - ./grafana/alarms.yaml:/usr/share/grafana/conf/provisioning/alerting/alarms.yaml:ro
+        - ./grafana/provisioning:/usr/share/grafana/conf/provisioning
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
 
