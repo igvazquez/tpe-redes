@@ -1,0 +1,120 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: group_1
+      folder: folder_1
+      interval: 10s
+      rules:
+        - uid: d6bb8621-0c27-4137-bdf0-a40de41d2391
+          title: API DOWN 10S
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: a709c474-00ce-4a61-b92e-b00247fa87cf
+              model:
+                editorMode: code
+                expr: up{instance="python_api:8000",job="python_api"}
+                hide: false
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.5
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: classic_conditions
+          noDataState: NoData
+          execErrState: Error
+          for: 10s
+          labels:
+            downtime: "10"
+          isPaused: false
+    - orgId: 1
+      name: group_2
+      folder: folder_1
+      interval: 1m
+      rules:
+        - uid: e0fbbf65-0e27-4fa3-bd9d-85574a105395
+          title: API DOWN 30s
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 60
+                to: 0
+              datasourceUid: a709c474-00ce-4a61-b92e-b00247fa87cf
+              model:
+                editorMode: code
+                expr: up{instance="python_api:8000",job="python_api"}
+                hide: false
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.5
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: classic_conditions
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          labels:
+            downtime: "30"
+          isPaused: false

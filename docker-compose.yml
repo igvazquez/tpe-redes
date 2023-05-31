@@ -61,8 +61,6 @@ services:
 
   grafana:
       image: grafana/grafana
-        # context: ./grafana
-        # dockerfile: Dockerfile
       ports:
         - "3000:3000"
       networks:
@@ -75,6 +73,7 @@ services:
         - prometheus
       volumes:
         - ./grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini:ro
+        - ./grafana/alarms.yaml:/usr/share/grafana/conf/provisioning/alerting/alarms.yaml:ro
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
 
