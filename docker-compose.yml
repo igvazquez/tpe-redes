@@ -60,7 +60,7 @@ services:
       - 9100:9100
 
   grafana:
-      image: grafana/grafana
+      image: grafana/grafana:latest
       ports:
         - "3000:3000"
       networks:
@@ -72,10 +72,11 @@ services:
         - python_api
         - prometheus
       volumes:
-        - ./grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini:ro
-        - ./grafana/alarms.yaml:/usr/share/grafana/conf/provisioning/alerting/alarms.yaml:ro
+        - ./grafana/defaults.ini:/etc/grafana/conf/defaults.ini:ro
+        - ./grafana/provisioning:/etc/grafana/provisioning/
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
+      restart: always
     
   blackbox:
     image: prom/blackbox-exporter:latest
