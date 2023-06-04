@@ -3,10 +3,10 @@ providers:
   alerts:
     name: "alerts"
     type: "file"
-    folder: ""
-    folderUid: ""
+    folder: "admin"
+    editable: true
     options:
-      path: "/etc/grafana/provisioning/alerts"
+      path: "/etc/grafana/provisioning/alerts/admin"
       foldersFromFilesStructure: true
       disableDeletion: true
       updateIntervalSeconds: 10
@@ -14,10 +14,9 @@ providers:
   dashboards:
     name: "dashboards"
     type: "file"
-    folder: ""
-    folderUid: ""
+    folder: "admin"
     options:
-      path: "/etc/grafana/provisioning/dashboards"
+      path: "/etc/grafana/provisioning/dashboards/admin"
       foldersFromFilesStructure: true
       disableDeletion: true
       updateIntervalSeconds: 10
