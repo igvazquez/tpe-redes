@@ -9,7 +9,7 @@
     <h1>Users</h1>
     <ul id="users-list"></ul>
     <script>
-        fetch('http://python_api:8888/users')
+        fetch('http://0.0.0.0:8888/users')
         .then(response => response.json())
         .then(users => {
             const usersList = document.getElementById('users-list');
