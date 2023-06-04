@@ -87,10 +87,9 @@ services:
         - prometheus
       volumes:
         - ./grafana/defaults.ini:/etc/grafana/conf/defaults.ini:ro
-        - ./grafana/provisioning:/etc/grafana/provisioning/
+        - ./grafana/provisioning:/etc/grafana/provisioning
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
-      restart: always
     
   blackbox:
     image: prom/blackbox-exporter:latest

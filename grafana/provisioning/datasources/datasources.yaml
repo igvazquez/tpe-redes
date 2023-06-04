@@ -10,6 +10,7 @@ datasources:
       type: prometheus
       access: proxy
       url: http://prometheus:9090
+      id: my-prometheus-datasource
       isDefault: true
       version: 1
       editable: true

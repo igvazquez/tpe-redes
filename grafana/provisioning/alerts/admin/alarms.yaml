@@ -13,7 +13,7 @@ groups:
               relativeTimeRange:
                 from: 600
                 to: 0
-              datasourceUid: a709c474-00ce-4a61-b92e-b00247fa87cf
+              datasourceUid: my-prometheus-datasource
               model:
                 editorMode: code
                 expr: up{instance="python_api:8000",job="python_api"}
@@ -72,7 +72,7 @@ groups:
               relativeTimeRange:
                 from: 60
                 to: 0
-              datasourceUid: a709c474-00ce-4a61-b92e-b00247fa87cf
+              datasourceUid: my-prometheus-datasource
               model:
                 editorMode: code
                 expr: up{instance="python_api:8000",job="python_api"}
