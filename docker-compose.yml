@@ -1,6 +1,16 @@
 version: "3.9"
 
 services:
+  apache:
+    image: httpd:latest
+    ports:
+      - 8081:80
+    volumes:
+      - ./apache/html:/usr/local/apache2/htdocs/
+      # - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    networks:
+      - app-network
+
   python_api:
     build:
       context: ./python_api
@@ -11,7 +21,7 @@ services:
       - db
       - prometheus
     networks:
-      - my-network
+      - app-network
 
   db:
     build:
@@ -22,7 +32,7 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
     networks:
-      - my-network
+      - app-network
 
   prometheus:
     image: prom/prometheus
@@ -34,7 +44,10 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - my-network
+      - monitoring-network
+      - exporters-network
+      - app-network
+
     depends_on:
       - postgres_exporter
     links:
@@ -47,7 +60,8 @@ services:
     ports:
       - "9187:9187"
     networks:
-      - my-network
+      - app-network
+      - exporters-network
     depends_on:
       - db
   
@@ -55,7 +69,7 @@ services:
     image: prom/node-exporter
     restart: always
     networks:
-      - my-network
+      - exporters-network
     ports:
       - 9100:9100
 
@@ -64,7 +78,7 @@ services:
       ports:
         - "3000:3000"
       networks:
-        - my-network  
+        - monitoring-network 
       depends_on:
         - postgres_exporter
         - db
@@ -86,10 +100,18 @@ services:
     ports:
       - '9115:9115'
     networks:
-      - my-network
+      - app-network
+      - exporters-network
+    depends_on: 
+      - db
+      - python_api
+      - prometheus
+      - apache
 
 networks:
-  my-network:
+  app-network:
+  exporters-network:
+  monitoring-network:
 
 volumes:
   grafana_data:

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>Users</h1>
+    <ul id="users-list"></ul>
+    <script>
+        fetch('http://python_api:8888/users')
+        .then(response => response.json())
+        .then(users => {
+            const usersList = document.getElementById('users-list');
+            users.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${user.name} - ${user.email}`;
+                usersList.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+</html>
