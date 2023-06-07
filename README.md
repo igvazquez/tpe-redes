@@ -46,7 +46,7 @@ Las alertas son configuradas a través de reglas. Podemos crear una alerta admin
 
 ![](/images/alerts.png)
 
-y tambien se puede setar etiquetas que funcionan como triggers para las políticas de notificacion.
+y también se puede setear etiquetas que funcionan como triggers para las políticas de notificación.
 
 ![](/images/labels.png)
 
