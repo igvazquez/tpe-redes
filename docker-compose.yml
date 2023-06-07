@@ -91,7 +91,7 @@ services:
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
       env_file:
-        - ./grafana/config.credentials.env
+        - ./grafana/credentials.env
 
   blackbox:
     image: prom/blackbox-exporter:latest
