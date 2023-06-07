@@ -31,11 +31,9 @@ scrape_configs:
       module: [http_2xx]  # Look for a HTTP 200 response.
     static_configs:
       - targets:
-        - http://prometheus.io    # Target to probe with http.
-        - https://prometheus.io   # Target to probe with https.
         - http://apache:80        # fake local web service.
         - http://apache:80/page2.html
-        - http://www.google.ca
+        - http://python_api:8888/slow-endpoint
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target

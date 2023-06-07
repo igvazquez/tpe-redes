@@ -1,2 +1,2 @@
-# tpe-redes
-Grafana &amp; Prometheus demo
+# Grafana &amp; Prometheus demo
+

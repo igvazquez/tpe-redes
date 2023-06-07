@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page 2</title>
+</head>
+<body>
+  <h1>Slow Endpoint test</h1>
+  <p>This is the second page of my website.</p>
+  <p id="slow-reply"></p>
+  <p><a href="index.html">Go back to the home page</a></p>
+
+  <script>
+    fetch('http://0.0.0.0:8888/slow-endpoint')
+    .then(response => response.text())
+    .then(response => {
+        const p = document.getElementById('slow-reply');
+        p.innerText = response
+    });
+</script>
+</body>
+</html>

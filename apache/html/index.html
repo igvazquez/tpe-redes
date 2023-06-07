@@ -8,6 +8,9 @@
 <body>
     <h1>Users</h1>
     <ul id="users-list"></ul>
+
+    <p>Request <a href="page2.html">slow endpoint</a></p>
+
     <script>
         fetch('http://0.0.0.0:8888/users')
         .then(response => response.json())

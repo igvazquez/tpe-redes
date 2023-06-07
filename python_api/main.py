@@ -69,6 +69,11 @@ def sleep():
     response_time = end_time - start_time
     return 'Response Time: {} seconds'.format(response_time)
 
+@app.route('/slow-endpoint')
+def slow_endpoint():
+    time.sleep(5)
+    return 'This is a slow response'
+
 if __name__ == '__main__':
     # Start the server
     app.run(debug=True, host='0.0.0.0', port=8888)
