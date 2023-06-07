@@ -90,7 +90,9 @@ services:
         - ./grafana/provisioning:/etc/grafana/provisioning
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
-    
+      env_file:
+        - ./grafana/config.credentials.env
+
   blackbox:
     image: prom/blackbox-exporter:latest
     privileged: true
