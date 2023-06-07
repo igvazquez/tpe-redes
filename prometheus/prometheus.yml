@@ -33,6 +33,7 @@ scrape_configs:
       - targets:
         - http://apache:80        # fake local web service.
         - http://apache:80/page2.html
+        - http://apache:80/error.html
         - http://python_api:8888/slow-endpoint
     relabel_configs:
       - source_labels: [__address__]
