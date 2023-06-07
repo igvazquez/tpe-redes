@@ -50,7 +50,7 @@ y también se pueden setear etiquetas que funcionan como triggers para las polí
 
 ![](/images/labels.png)
 
-Puntualmente configuramos notificaciones para enviar mensajes por mail vía el servidor smtp de google informando a distintos usuarios dependiendo el tiempo de caída del servicio. Si está caído durante 10 segundos se le informa al operador y si está caído por más de 30 segundos se le informa al administrador de la red. La configuracion global de grafana se describe en el archivo defaults.ini.
+Puntualmente configuramos notificaciones para enviar mensajes por mail vía el servidor smtp de google informando a distintos usuarios dependiendo el tiempo de caída del servicio. Si está caído durante 10 segundos se le informa al operador y si está caído por más de 30 segundos se le informa al administrador de la red. La configuracion global de Grafana se describe en el archivo defaults.ini.
 
 ```ini
 ...
