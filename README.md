@@ -9,7 +9,7 @@
 
 Realizaremos una demo de Grafana en la cual implementamos la siguiente arquitectura
 
-![](docker.png)
+![Diagrama](/images/docker.png)
 
 ## Requerimientos
 ### Docker
@@ -42,9 +42,34 @@ Para cumplir con el objetivo del trabajo, primero nos encargamos de adquirir mé
 
 Luego, para el monitoreo de un sitio web utilizamos BlackBox Exporter que nos permite sondear múltiples endpoints con diferentes protocolos e ir verificando, por ejemplo, el código de respuesta. Con esta herramienta observamos al servidor de apache y le pedimos distintas páginas estáticas además de realizar un request a un endpoint lento dentro de la API de Python, simulando el uso de un usuario dentro de un sitio web y capturando las métricas.
 
-Las alertas son configuradas a través de reglas. Podemos crear una alerta administrada por Grafana a partir de una query con PromQL sobre alguno de los datasource configurados y enlazar condicionales de distintos tipos que activan la alarma. Además se puede configurar el tiempo de evaluación de estos condicionales y labels que son utilizadas por las políticas de notificaciones.
+Las alertas son configuradas a través de reglas. Podemos crear una alerta administrada por Grafana a partir de una query con PromQL sobre alguno de los datasource configurados y enlazar condicionales de distintos tipos que activan la alarma. Además se puede configurar el tiempo de evaluación de estos condicionales.
 
-Puntualmente configuramos notificaciones para enviar mensajes por mail vía el servidor smtp de google informando a distintos usuarios dependiendo el tiempo de caída del servicio. Si está caído durante 10 segundos se le informa al operador y si está caído por más de 30 segundos se le informa al administrador de la red.
+![](/images/alerts.png)
+
+y también se pueden setear etiquetas que funcionan como triggers para las políticas de notificación.
+
+![](/images/labels.png)
+
+Puntualmente configuramos notificaciones para enviar mensajes por mail vía el servidor smtp de google informando a distintos usuarios dependiendo el tiempo de caída del servicio. Si está caído durante 10 segundos se le informa al operador y si está caído por más de 30 segundos se le informa al administrador de la red. La configuracion global de Grafana se describe en el archivo defaults.ini.
+
+```ini
+...
+#################################### SMTP / Emailing #####################
+[smtp]
+enabled = true
+host = smtp.gmail.com:587
+user = alertas.grafana.redes@gmail.com
+password = cvqqkieykenjzmdx
+cert_file =
+key_file =
+skip_verify = false
+from_address = alertas.grafana.redes@gmail.com
+from_name = Grafana
+ehlo_identity =
+startTLS_policy =
+...
+``` 
+
 
 Los servicios que vamos a monitorear son una API en Python utilizando Flask y su base de datos Postgres, utilizando Postgres Exporter. Para las métricas de la API existe un cliente de Prometheus para Python y también un exporter particular para Flask, esto nos permite tener métricas como el tiempo de respuesta, cantidad de requests al endpoint, etc.
 
