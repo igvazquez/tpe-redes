@@ -86,7 +86,7 @@ services:
         - python_api
         - prometheus
       volumes:
-        - ./grafana/defaults.ini:/etc/grafana/conf/defaults.ini:ro
+        - ./grafana/defaults.ini:/etc/grafana/grafana.ini:ro
         - ./grafana/provisioning:/etc/grafana/provisioning
         - grafana_data:/var/lib/grafana
         - grafana_log:/var/log/grafana
